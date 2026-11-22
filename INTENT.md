@@ -1,6 +1,6 @@
 # Intent
 
-Build a repeatable Multica setup for a product engineering team.
+Build Potato, a repeatable agent framework for a product engineering team.
 Agents should develop features, investigate bugs and triage production issues with evidence.
 
 ## Decisions
@@ -15,11 +15,14 @@ Agents should develop features, investigate bugs and triage production issues wi
 - Allow agent Git writes and PR/MR publication. Agent instructions require human merge; this is an accepted trust model.
 - Include exact-commit test results, coverage, mode and visual evidence in each code PR/MR.
 - Use full regression by default. Fast mode is a declared, approved smaller profile, never a hidden regression shortcut.
-- Use the Poteto pyramid: codebase, static analysis, verification, prose, then human review.
+- Use the Potato pyramid: codebase, static analysis, verification, prose, then human review.
+- Make Ronda ready before scaling runners. Rank repeated corrections and replace them with executable checks where practical.
+- Validate evidence against the tested commit, clean state, approved profile and actual artifacts before publication.
 
 ## First pilot
 
 Use `rhapsodixx/ronda`. Reuse its local gate and synthetic browser tests through a repository profile.
+Start with its [repository readiness work](docs/repository-readiness.md) and the minimum runner needed to prove that work.
 The platform itself must work with GitHub, GitLab, Bitbucket and other Git hosts.
 The pilot does not authorize changes to its production installation.
 

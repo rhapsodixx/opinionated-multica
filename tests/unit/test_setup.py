@@ -24,6 +24,10 @@ class ReleaseTests(unittest.TestCase):
     def test_valid_release_is_accepted(self):
         self.assertEqual(setup.validate_release(release()), release())
 
+    def test_local_content_addressed_image_id_is_accepted(self):
+        document = release() | {"image": "sha256:" + "a" * 64}
+        self.assertEqual(setup.validate_release(document), document)
+
     def test_bad_schema_and_unresolved_versions_are_rejected(self):
         for document in ([], release() | {"schema": 2}):
             with self.subTest(document=document), self.assertRaises(ValueError):
@@ -68,6 +72,13 @@ class PreparationTests(unittest.TestCase):
         self.assertFalse((self.root / "private" / "multica-token").exists())
         settings = json.loads((target / "claude-settings.json").read_text())
         self.assertIn("**/CLAUDE.local.md", settings["claudeMdExcludes"])
+
+    def test_compose_bind_paths_do_not_interpolate_output_directory_variables(self):
+        target = setup.prepare(release(), self.root / "worker-$HOME",
+            "https://multica.example.test", "engineering", self.root / "token")
+        mounts = json.loads((target / "compose.json").read_text())["services"]["runner"]["volumes"]
+        sources = [mount["source"] for mount in mounts if mount["type"] == "bind"]
+        self.assertTrue(all(source.startswith("./") and "$" not in source for source in sources))
 
     def test_identical_preparation_is_idempotent(self):
         self.prepare()

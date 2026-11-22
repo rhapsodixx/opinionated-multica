@@ -1,0 +1,41 @@
+{
+  "name": "@rhapsodixx/potato",
+  "version": "0.1.0",
+  "description": "Potato: consistent Multica runners with local verification",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.8.0"
+  },
+  "bin": {
+    "potato": "bin/potato.mjs"
+  },
+  "files": [
+    "bin/potato.mjs",
+    "lib/installer.mjs",
+    "lib/terminal.mjs",
+    "runner/Dockerfile",
+    "runner/install-image-tools.py",
+    "runner/claude-launcher.sh",
+    "runner/entrypoint.sh",
+    "runner/start-runner.sh",
+    "runner/claude-settings.json",
+    "runner/multica-claude.local.md",
+    "config/toolchain.json",
+    "runner_setup.py",
+    "scripts/prepare-runner.py",
+    "scripts/doctor-runner.py",
+    "setup.sh",
+    ".dockerignore"
+  ],
+  "scripts": {
+    "test": "npm run test:full",
+    "test:full": "node --experimental-test-coverage --test-coverage-include='lib/*.mjs' --test-coverage-lines=85 --test-coverage-functions=85 --test-coverage-branches=80 --test test/unit/*.test.mjs test/integration/*.test.mjs",
+    "test:fast": "node --experimental-test-coverage --test-coverage-include='lib/*.mjs' --test-coverage-lines=85 --test-coverage-functions=85 --test-coverage-branches=80 --test test/unit/*.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhapsodixx/opinionated-multica.git"
+  }
+}

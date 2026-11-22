@@ -1,21 +1,29 @@
-# Implementation work
+# Potato implementation work
 
 Status: tracked design and preparation, 22 November 2026.
 
 | Order | Deliverable | Acceptance |
 | --- | --- | --- |
+| 0 | [Ronda repository readiness](repository-readiness.md) and minimum runner | Baseline failures/commands/journeys; feature map; tested existing drivers; ranked corrections become API/check improvements with good/bad examples |
 | 1 | Certified pinned polyglot runner image and private extension bundle | Doctor matches every pin; two clean runners receive identical skills/plugins/MCP; personal local rules do not load |
-| 2 | Local full/fast verification and coverage adapter | Correct mode/impact selection; real per-layer coverage; no missing/empty/failed required suite reports success |
+| 2 | Local full/fast verification and coverage adapter | Correct mode/impact selection; real per-layer coverage; validated full SHA, clean state, profile/release, results and artifact contents |
 | 3 | Three workflow skill adapters and human checkpoints | Feature intent/ADR/plan and TDD; systematic bug investigation; private read-only issue triage parity |
 | 4 | Provider-neutral Git publication with evidence | Agent commits/pushes task branch and opens/updates PR/MR with template, actual output and screenshots; no protection/hosted-CI dependency |
 | 5 | Parallel and cross-repo acceptance | Separate worktrees/services; agreed contracts; aggregate SHA/test evidence; serialized migration/integration |
-| 6 | Ronda pilot and measured rollout | One feature, one bug and one synthetic alert replay; local gate and applicable seeded UI tests; measured resources; human merge |
+| 6 | Ronda pilot and measured rollout | One feature, one bug and one synthetic alert replay; reverts/fix-forward/escapes/rework/performance against baseline; bounded review; human merge |
 
+Complete Phase 0 before broad runner certification or concurrency expansion.
 After the shared contracts, image packaging, test adapter and workflow adapters can be implemented by separate agents.
 Define their file ownership and interfaces first. Integrate in order and run the full local profile.
 Keep coordinator deployment and production changes outside the initial runner preparation work.
+Keep repository cleanup focused on affected features and boundaries. Use statecharts selectively, then test the relevant transitions.
+
+The installer checks Docker/Compose, builds the pinned shared image and prepares a bundle. It never logs in or starts the daemon.
+Command-blocking hooks and an independent evidence verifier require separate proposals. Neither is an approved implementation prerequisite.
 
 ## Tracking issues
+
+- [Phase 0: prove Ronda repository readiness before scaling Potato](https://github.com/rhapsodixx/opinionated-multica/issues/7)
 
 - [Build and certify the pinned polyglot runner image](https://github.com/rhapsodixx/opinionated-multica/issues/1)
 - [Implement local full and fast verification with per-layer coverage](https://github.com/rhapsodixx/opinionated-multica/issues/2)

@@ -1,10 +1,14 @@
-# Prepare a runner
+# Set up a Potato runner
 
-The helpers prepare configuration now. They do not build the future image, install private extensions or deploy a service during tests.
+Potato builds the shared-tool image and reuses the Python helpers to prepare a runner bundle.
+Use `bash setup.sh` or the npx command in the README. Login and startup remain explicit.
+Tests use fake Docker commands; private extensions and real runtime acceptance are separate work.
 
 ## Image contract
 
-First build and certify one private runner image. This is a tracked implementation task, not a finished image in this repository.
+The versioned build assets are `runner/Dockerfile` and `config/toolchain.json`.
+Build and certify one image before fleet rollout. See [toolchain pins and image acceptance](image-toolchain.md).
+The public image does not contain private skills, plugins or credentials.
 
 The image must provide:
 
@@ -16,7 +20,9 @@ The image must provide:
 - Operator-supplied approved native plugins/skills and runtime MCP configuration, without baked-in credentials.
 - Reproducible tool/plugin pins and a successful version doctor plus headless skill/hook/MCP acceptance.
 
-Reference the image by digest. Fill every tool's exact `major.minor.patch` version in a private copy of the release example.
+For fleet use, reference the certified image by registry digest. A local build may use its immutable `sha256:` image ID.
+Potato records the local ID and every exact tool version automatically.
+For manual preparation, fill every tool's exact `major.minor.patch` version in a private copy of the release example.
 The source of truth is the certified image/release, not the laptop's versions.
 Do not copy personal HOME, private local rules or credentials into the image.
 
@@ -36,8 +42,13 @@ python3 scripts/prepare-runner.py \
 
 The tool validates the pins and writes `compose.json`, policy, settings, launch scripts and file hashes.
 It does not read the token, contact a server, pull an image or start Docker.
-Repeat preparation with identical inputs safely. If files differ, it refuses to overwrite them; use a new bundle directory.
-`compose.json` uses JSON syntax accepted by Compose. Run `docker compose -f <bundle>/compose.json config --quiet` before startup.
+The one-command installer stages the bundle beside its destination, validates it, then publishes it.
+A failed attempt removes its own staging files and can be retried at the same destination.
+Use an output path shared with the Docker VM; on Colima this is normally under your home directory.
+Compose bind sources are relative to the bundle, so literal dollar signs in a path are not interpolated.
+Repeat manual preparation with identical inputs safely. If files differ, it refuses to overwrite them; use a new bundle directory.
+`compose.json` uses JSON syntax accepted by Compose. Potato validates it automatically.
+Manual setup can use `docker compose -f <bundle>/compose.json config --quiet` or the standalone `docker-compose` form.
 
 Each bundle directory is a distinct Compose project with its own persistent runner HOME.
 Use unique worker directory names. Never copy one runner's login state to another.

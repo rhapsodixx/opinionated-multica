@@ -37,6 +37,31 @@ Release/integration work uses full mode. A required failed or skipped test canno
 The future product adapter selects the mode from approved repo rules. The preparation helper's own test command accepts an explicit mode;
 it does not claim to implement product impact analysis.
 
+## Evidence validation
+
+The product publication adapter must validate evidence mechanically before it publishes a code PR/MR.
+This is an acceptance requirement; the preparation helper does not yet implement that adapter.
+Finding a JSON file or reading a claimed pass is insufficient.
+
+- Match the full tested commit SHA to the candidate commit and PR/MR head.
+- Verify a clean source worktree before and after the run. Record tracked changes and untracked source files.
+- Declare generated report paths separately. Excluding reports must not hide source changes.
+- Match the approved repository profile revision, runner image/policy release and selected mode to the actual run.
+- Validate the mode reason and the required layers against the approved impact policy.
+- Read actual command results, exit statuses, counts, failures, skips and timeouts.
+- Reject missing, empty, failed or unavailable required suites. Detect missing expected results rather than trusting a summary flag.
+- Read measured coverage output and scenario denominators. Compare them with the approved baseline and thresholds.
+- Resolve artifact references and confirm they contain the expected logs, coverage, screenshots or traces from that run.
+- Reject stale or inconsistent evidence. Re-run relevant checks after candidate, source, profile or integration changes.
+
+Use a small versioned evidence schema with required fields and consistent result values.
+Keep raw output available through local paths or an approved artifact store; no hosted store is required.
+Artifact checks should compare recorded content digests where available. A digest binds content but does not prove test adequacy.
+Human review still assesses whether the checks prove the intended behavior.
+
+Baseline failures stay visible with their owners and acceptance limits. Do not convert them to passes or hide them through mode changes.
+Use [repository readiness](repository-readiness.md) to select correction examples, boundary checks and complex transition tests.
+
 ## This repository's checks
 
 ```bash
@@ -45,10 +70,14 @@ uv run --locked python scripts/check.py full
 uv run --locked python scripts/check.py fast
 ```
 
-Full runs unit tests, CLI integration tests and shell syntax checks. Fast runs unit tests and shell syntax checks.
+Full runs Python and Node unit tests, both CLI integration suites and shell syntax checks.
+Fast runs both unit suites and shell syntax checks; it names both omitted integration suites.
 The summary reports the actual mode and excluded integration layer.
-Coverage.py measures the shared `runner_setup.py` module; CLI processes have separate behavior tests.
-The local combined line/branch coverage floor is 85% for that helper, not a rule for future product repositories.
+Coverage.py measures `runner_setup.py`, the image-install helper and the Node-result parser.
+Node's native coverage measures `lib/*.mjs`. CLI entry points have separate behavior tests.
+The Python combined coverage floor is 85%. Node floors are 85% lines/functions and 80% branches.
+These helper thresholds are not rules for future product repositories.
+An empty Node integration selection, TODO-only results or incomplete pass counts cannot report success.
 
 There is no app UI here. Functional UI is **N/A: no UI in this repository**.
 No image build, Multica login, live service, scan or product UI test runs during these checks.

@@ -2,6 +2,8 @@
 
 Read INTENT.md and docs/strategy.md before changing this project.
 
+- `bin/potato.mjs` and `lib/` own the npx/shell setup flow; Node 22.8+ and built-in tests, no runtime npm dependencies.
+- `runner/Dockerfile` and `config/toolchain.json` own the shared tool image and source pins.
 - `runner_setup.py` validates release metadata and prepares local runner bundles.
 - `runner/` contains runner policy and startup assets. Keep engine-specific instructions there.
 - `scripts/` contains preparation, diagnostic and local-check entry points.

@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "base_image": "python:3.12.16-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+  "tools": {
+    "claude": "2.1.330",
+    "multica": "0.11.1",
+    "node": "24.22.3",
+    "bun": "1.4.5",
+    "go": "1.27.4",
+    "python": "3.12.16",
+    "uv": "0.13.9",
+    "git": "2.56.1",
+    "gopls": "0.24.0",
+    "gitleaks": "8.30.1",
+    "golangci-lint": "2.15.0",
+    "govulncheck": "1.10.0",
+    "gh": "2.105.0",
+    "jq": "1.8.2"
+  },
+  "debian_snapshot": "20261120T000000Z",
+  "platforms": {
+    "amd64": {
+      "node": {
+        "url": "https://nodejs.org/dist/v24.22.3/node-v24.22.3-linux-x64.tar.xz",
+        "sha256": "4f2b175a6d53a5c617a80dba2676238a0688cef28c6da4eba35c7d844e66fcfb"
+      },
+      "go": {
+        "url": "https://go.dev/dl/go1.27.4.linux-amd64.tar.gz",
+        "sha256": "7226736c2339719cda28fbf3a54d71aa63bcefe376e98cef00034268dab24840"
+      },
+      "bun": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.5/bun-linux-x64-baseline.zip",
+        "sha256": "dcb23a18a1c2fff12d57bcef696dbbb42eb67fde29f43816ecb595459a24c463"
+      },
+      "uv": {
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-x86_64-unknown-linux-gnu.tar.gz",
+        "sha256": "a7fbaff2b9a271d85c1bdb540941090fd1ce011797b4abeb48e4dcd39c2471d5"
+      },
+      "multica": {
+        "url": "https://github.com/multica-ai/multica/releases/download/v0.11.1/multica-cli-0.11.1-linux-amd64.tar.gz",
+        "sha256": "e59fd0db93bb184cc5349ff60d0d982f8d2ce46355269bec879eb12dfe61c003"
+      },
+      "gitleaks": {
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz",
+        "sha256": "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+      },
+      "golangci-lint": {
+        "url": "https://github.com/golangci/golangci-lint/releases/download/v2.15.0/golangci-lint-2.15.0-linux-amd64.tar.gz",
+        "sha256": "9b7fe6a6bf6334b98decf8d86b11415ea7889afdabdd1959fdce23af2a9ebcea"
+      },
+      "gh": {
+        "url": "https://github.com/cli/cli/releases/download/v2.105.0/gh_2.105.0_linux_amd64.tar.gz",
+        "sha256": "79e7ab5db738c48777b696e374f8b428f0647debfb424f44d2f426370407fe2f"
+      },
+      "jq": {
+        "url": "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-linux-amd64",
+        "sha256": "b1c22172dd303f3be49e935aa56aa48a8b7a46e0bc838b4997d3bb451495870f"
+      },
+      "claude": {
+        "url": "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.330/linux-x64/claude",
+        "sha256": "f390eaa0814e6a1bff74cbb47acb74cb9c89d30ced809fe0af5af00c7bfe8ebb"
+      }
+    },
+    "arm64": {
+      "node": {
+        "url": "https://nodejs.org/dist/v24.22.3/node-v24.22.3-linux-arm64.tar.xz",
+        "sha256": "6e51a2ada00f0011cc266f65d98922b403d7ad88f809ca2aa615a5fe1ce6e86c"
+      },
+      "go": {
+        "url": "https://go.dev/dl/go1.27.4.linux-arm64.tar.gz",
+        "sha256": "3392582988a273a87ab5043ee1b2c9c17a2c3c00580bf9326c47a2e0aaaeac92"
+      },
+      "bun": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.5/bun-linux-aarch64.zip",
+        "sha256": "18656a3bf0ea5641f5796ae4213b75255579a70a0fded2f337933785568cdf84"
+      },
+      "uv": {
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-aarch64-unknown-linux-gnu.tar.gz",
+        "sha256": "0797542018e541a9288855df555c8077eed06f7a47d206362030480e8ecc9f3d"
+      },
+      "multica": {
+        "url": "https://github.com/multica-ai/multica/releases/download/v0.11.1/multica-cli-0.11.1-linux-arm64.tar.gz",
+        "sha256": "00d334c3f829b5e607061e6d219d32a14c5eb8cc46a9b50189daceaffc144607"
+      },
+      "gitleaks": {
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_arm64.tar.gz",
+        "sha256": "e4a487ee7ccd7d3a7f7ec08657610aa3606637dab924210b3aee62570fb4b080"
+      },
+      "golangci-lint": {
+        "url": "https://github.com/golangci/golangci-lint/releases/download/v2.15.0/golangci-lint-2.15.0-linux-arm64.tar.gz",
+        "sha256": "b4d8f17068b35ee6060cc2f69a16fb48740d706fbba81661c318649c114a6998"
+      },
+      "gh": {
+        "url": "https://github.com/cli/cli/releases/download/v2.105.0/gh_2.105.0_linux_arm64.tar.gz",
+        "sha256": "b1278c75107423d818f1937fd92cafc9e5e9b606631568f68d7fb816f5885a02"
+      },
+      "jq": {
+        "url": "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-linux-arm64",
+        "sha256": "8b85c817833814ddca00a144c33705546355afccf0cf39b188f3cdb48b852309"
+      },
+      "claude": {
+        "url": "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.330/linux-arm64/claude",
+        "sha256": "6016f90cac783e367fb1aa97c768a2efb94a0128a5b46b70fb3d8fcbbd9dd444"
+      }
+    }
+  },
+  "go_modules": {
+    "gopls": {
+      "package": "golang.org/x/tools/gopls",
+      "version": "v0.24.0"
+    },
+    "govulncheck": {
+      "package": "golang.org/x/vuln/cmd/govulncheck",
+      "version": "v1.10.0"
+    }
+  },
+  "sources": {
+    "git": {
+      "url": "https://www.kernel.org/pub/software/scm/git/git-2.56.1.tar.xz",
+      "sha256": "f0b0bf89264b9bd2e1c640363e7529643989da76281600473c50745cd34a607f"
+    }
+  },
+  "manifests": {
+    "claude": {
+      "url": "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.330/manifest.json",
+      "sha256": "7f2ccd5351c1467cf2ee1011011a7dca00bc7f7da5652499a297c0672a32564c"
+    },
+    "multica": {
+      "url": "https://github.com/multica-ai/multica/releases/download/v0.11.1/checksums.txt",
+      "sha256": "72610d2ee71fcfe9433db8a8a8c6059e88a3b4683772fa176438fa6a8ee0094b"
+    }
+  }
+}
