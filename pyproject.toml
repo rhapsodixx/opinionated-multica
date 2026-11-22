@@ -1,0 +1,20 @@
+[project]
+name = "opinionated-multica"
+version = "0.1.0"
+description = "Strategy and preparation tools for consistent Multica runners"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["coverage==7.11.0"]
+
+[tool.uv]
+package = false
+
+[tool.coverage.run]
+branch = true
+source = ["runner_setup"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85

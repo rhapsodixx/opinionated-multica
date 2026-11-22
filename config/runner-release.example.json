@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "image": "registry.example.test/team/multica-runner@sha256:REPLACE_WITH_APPROVED_DIGEST",
+  "tools": {
+    "claude": "REPLACE_WITH_APPROVED_VERSION",
+    "multica": "REPLACE_WITH_APPROVED_VERSION",
+    "node": "REPLACE_WITH_APPROVED_VERSION",
+    "bun": "REPLACE_WITH_APPROVED_VERSION",
+    "go": "REPLACE_WITH_APPROVED_VERSION",
+    "python": "REPLACE_WITH_APPROVED_VERSION",
+    "uv": "REPLACE_WITH_APPROVED_VERSION",
+    "git": "REPLACE_WITH_APPROVED_VERSION",
+    "gopls": "REPLACE_WITH_APPROVED_VERSION",
+    "gitleaks": "REPLACE_WITH_APPROVED_VERSION",
+    "golangci-lint": "REPLACE_WITH_APPROVED_VERSION",
+    "govulncheck": "REPLACE_WITH_APPROVED_VERSION",
+    "gh": "REPLACE_WITH_APPROVED_VERSION",
+    "jq": "REPLACE_WITH_APPROVED_VERSION"
+  }
+}

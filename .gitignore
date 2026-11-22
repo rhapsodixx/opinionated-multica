@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.coverage*
+coverage.xml
+htmlcov/
+reports/
+bundles/
+private/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store

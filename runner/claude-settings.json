@@ -1,0 +1,4 @@
+{
+  "claudeMdExcludes": ["**/CLAUDE.local.md"],
+  "env": {"DISABLE_AUTOUPDATER": "1"}
+}
