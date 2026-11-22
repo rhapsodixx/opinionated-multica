@@ -130,6 +130,10 @@ Use actual output in the body. Full reports may be linked from an approved store
 
 ## Human checkpoints
 
+Use Multica issue activity for plan approval and the Git host's PR/MR review for merge acceptance.
+See the [README checkpoint screens](../README.md#where-humans-review-the-work) for the proposed tool locations and actions.
+Multica status handoffs and runner approval matching still need configuration and acceptance.
+
 Before implementation, review intent, alternatives/ADR, contracts, acceptance cases, coverage plan, task ownership, data risks and rollback.
 Approval refers to the plan revision and scope. A material scope/design change returns to this checkpoint.
 

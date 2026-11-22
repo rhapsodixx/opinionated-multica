@@ -69,6 +69,73 @@ Blue arrows show task progress. The dashed arrow supplies the shared runner rele
 Sources: [Mermaid](docs/diagrams/workflow.mmd), [diagram layout](docs/diagrams/workflow.source.html), [offline HTML](docs/diagrams/workflow.html).
 Read the [strategy](docs/strategy.md) for the full workflow rules and human review checklist.
 
+## Where humans review the work
+
+Use Multica for plan review and the Git host for code review and merge.
+The screens below are illustrative mocks, shown in chat before publication here.
+All task IDs, comments, commits, test results and coverage values in them are fictional.
+
+| Checkpoint | Tool and feature | Human action | Record |
+| --- | --- | --- | --- |
+| Before code | Multica issue activity and a workflow step assigned to a human | Review the plan. Post approval for its exact revision. Move the issue to Implementation. | Human comment, plan revision, full Git docs commit and scope |
+| Before merge | GitHub PR Conversation, Files changed and Review changes | Read local evidence. Review the code and tests. Submit a review, then merge. | Current PR head, results, coverage, screenshots and human review |
+
+### Before code: Multica plan review
+
+![Illustrative Multica plan-review screen with versioned Git links and a human approval comment draft](docs/checkpoints/before-code.png)
+
+1. The planning agent posts the intent, design, ADR and implementation/test plan links on the Multica issue.
+2. The links point to a fixed Git docs commit. Planning can create documents before production code work starts.
+3. The issue enters **Plan review**, a proposed workflow step assigned to a human member.
+4. The human checks scope, alternatives, contracts, acceptance cases, coverage, risks and rollback.
+5. The human posts approval with the plan revision, full docs commit and any scope limits.
+6. The human changes the issue status to **Implementation**, which hands work to the coding agent.
+7. Before code work, the runner checks the approval author and confirms the approved revision and scope still match.
+
+Example approval format:
+
+```text
+Approved <plan revision> at docs commit <full Git commit>.
+Scope: <approved changes and exclusions>.
+Test mode and acceptance: <approved profile and cases>.
+```
+
+Configure the handoffs under **Multica Settings → Workflows**.
+**Plan review → Hand to a member** avoids starting an implementation agent at that step.
+**Implementation → Hand to an agent** starts the implementation step when the human moves the issue.
+These status names are our proposed configuration, not built-in approval buttons.
+A status change alone does not replace the approval comment. Approval matching is planned runner behavior that still needs acceptance.
+
+If the plan needs changes, the human requests them before implementation.
+The planner publishes a new revision and requests approval again.
+Only a decision from an authorized human counts; an agent's approval text does not authorize implementation.
+
+### Before merge: Git-host PR or MR review
+
+![Illustrative GitHub PR screen with local evidence, coverage, screenshot preview, review form and human merge action](docs/checkpoints/before-merge.png)
+
+1. The runner passes the required local checks, then publishes the PR/MR with the shared description template.
+2. In GitHub **Conversation**, the human reads the plan link, tested commit, mode, logs, coverage and screenshots.
+3. The human checks that the evidence matches the current PR head and names all omitted test layers.
+4. In **Files changed**, the human reviews behavior, test assertions, contracts, data changes and rollback.
+5. The human chooses **Review changes → Approve → Submit review**, or requests changes.
+6. After acceptance, a human uses **Merge pull request**. The agent records the outcome and PR link on the Multica issue.
+
+New commits need fresh relevant evidence. Material changes need a new human review.
+Fast-mode results must state that functional UI regression did not run when that layer is excluded.
+Other Git hosts use their equivalent PR/MR discussion, review and merge features through the publication adapter.
+
+The agent's merge restriction remains an instruction-based boundary.
+No hosted workflow, ruleset or branch protection is required. GitHub may still show merge controls before approval.
+The mock review and merge controls do not prove that any real approval or merge occurred.
+
+Editable sources: [before code](docs/checkpoints/before-code.html), [before merge](docs/checkpoints/before-merge.html).
+The mock screens are static HTML rendered in Chromium; no product session or production data was captured.
+
+Feature references: [Multica comments](https://multica.ai/docs/comments), [Multica workflows](https://multica.ai/docs/workflows),
+[GitHub PR reviews](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/reviewing-proposed-changes-in-a-pull-request).
+The approval wording and workflow mapping above are this project's proposed conventions.
+
 ## Start here
 
 - [Intent and decisions](INTENT.md)
