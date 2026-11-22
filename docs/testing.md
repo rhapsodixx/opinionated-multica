@@ -37,6 +37,49 @@ Release/integration work uses full mode. A required failed or skipped test canno
 The future product adapter selects the mode from approved repo rules. The preparation helper's own test command accepts an explicit mode;
 it does not claim to implement product impact analysis.
 
+## Playwright as the final browser check
+
+Use Playwright when a change affects a browser journey and the journey can run in an isolated test environment.
+Include backend changes whose effects need UI verification. Record the decision and required journeys in the approved test plan.
+Run static checks, unit tests and integration/API tests first. Then run the applicable Playwright regression profile before PR/MR publication.
+This final check adds to the earlier tests. It does not replace them or the failed regression test required by TDD.
+
+For a UI change, define the journey, user-visible assertions, synthetic fixtures and browser/viewport/role/state matrix before implementation.
+Use a running test application and disposable test services. Give each parallel task isolated data and a browser context.
+Prefer user-facing locators and assertions that wait for the expected state. Avoid fixed sleeps as the main synchronization method.
+Start with Chromium and one browser worker on constrained machines. Expand the approved matrix when product risks require other browsers.
+Do not reduce the required matrix because a runner lacks capacity; route the task to a capable runner.
+
+| Layer | Shared requirement | Ownership |
+| --- | --- | --- |
+| Automated tests | Version-locked Playwright package, matching browser revisions, assertions and declared local command | Repository test profile and lockfile |
+| Agent skill | Plan journeys, reuse drivers, run tests, inspect failures and collect evidence | Shared runner policy and approved browser-verification skill release |
+| Playwright MCP | Same pinned definition on every runner; invoke when useful for exploration, reproduction or screenshots | Shared MCP catalog; isolated session and task-scoped access |
+
+Keep the Playwright test package local to the repository. Use Node/TypeScript or Python bindings to match existing tests.
+Ronda should reuse its confirmed Python Playwright smokes before adding another harness.
+The image supplies browser OS dependencies; install the browser revisions required by the locked package into a versioned, architecture-specific cache.
+Do not install an unpinned global Playwright or use `@latest` in the shared MCP definition.
+Keep MCP dependencies separate so their version cannot silently change the repository's test package or browser revision.
+
+An MCP session helps the agent investigate and operate a browser. It does not replace the repeatable test command or its exit status.
+Publish discovered regressions as repository tests when feasible. Do not use personal browser profiles or production authentication state.
+Share MCP definitions across runners, not credentials, browser sessions or test state.
+The native browser skill, MCP package pin and headless delivery still require certification; this policy does not claim they are installed.
+
+Record the full tested SHA, command, app readiness, browser version, selected matrix and passed/failed/skipped scenario counts.
+Keep a machine-readable report and relevant synthetic-data screenshots. Retain failure traces and retry history when the test harness supports them.
+Treat flaky retries as visible evidence, not a clean first-attempt pass. Apply the repository's approved retry policy.
+Review screenshots for visual changes; successful page loads or screenshots alone do not prove functional behavior.
+Report journey coverage as completed/required scenarios, separately from unit line/branch coverage.
+
+Full mode includes the complete declared UI profile. Fast mode may omit it only for an approved eligible scope and must disclose that omission.
+If the repository has no UI, report N/A with a reason. If a required UI environment is unavailable, report Not run and block publication.
+When automation is genuinely infeasible, obtain an approved plan for alternate verification before implementation; do not invent a pass or silently waive a suite.
+
+References: [browser versions](https://playwright.dev/docs/browsers), [assertions](https://playwright.dev/docs/test-assertions),
+[traces](https://playwright.dev/docs/trace-viewer-intro) and [Playwright MCP](https://github.com/microsoft/playwright-mcp).
+
 ## Evidence validation
 
 The product publication adapter must validate evidence mechanically before it publishes a code PR/MR.

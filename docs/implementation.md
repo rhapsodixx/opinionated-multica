@@ -21,6 +21,11 @@ Keep repository cleanup focused on affected features and boundaries. Use statech
 The installer checks Docker/Compose, builds the pinned shared image and prepares a bundle. It never logs in or starts the daemon.
 Command-blocking hooks and an independent evidence verifier require separate proposals. Neither is an approved implementation prerequisite.
 
+Browser acceptance spans deliverables 1–4: deliver the shared browser-verification skill and pinned Playwright MCP definition,
+reuse each repository's locked test harness, and run applicable UI journeys as the final local verification layer.
+Prove matching browser revisions, isolated sessions, scenario coverage, screenshots and failure artifacts on both image architectures.
+MCP exploration alone cannot satisfy the automated test gate. See the [test policy](testing.md#playwright-as-the-final-browser-check).
+
 ## Tracking issues
 
 - [Phase 0: prove Ronda repository readiness before scaling Potato](https://github.com/rhapsodixx/opinionated-multica/issues/7)

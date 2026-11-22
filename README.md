@@ -1,6 +1,6 @@
-# Tometo
+# Potato
 
-<img src="assets/tometo-logo.png" alt="A plain potato drawn in manga style on a white background" width="220" height="220">
+<img src="assets/potato-logo.png" alt="A plain potato drawn in manga style on a white background" width="220" height="220">
 
 A potato-inspired workflow for a **not-so-dark software factory**, heavily influenced by **poteto (Lauren Tan)**.
 
@@ -17,7 +17,7 @@ Start with a working edit-and-check loop. Add more agents only when that loop ho
 
 ## What this project is about
 
-Tometo defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
+Potato defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
 Multica assigns the work. Claude Code runs it inside pinned containers on dedicated worker VMs.
 
 Every runner receives the same approved skills, plugins, MCP definitions, toolchain catalog and hooks.
@@ -26,6 +26,10 @@ Parallel agents use separate worktrees and test services, so they do not edit on
 
 The strategy is documented and tracked. Phase 0 proves Ronda's edit-and-check loop before fleet rollout or parallel scaling.
 Start with [repository readiness](docs/repository-readiness.md) and the [implementation issues](docs/implementation.md#tracking-issues). Ronda is the first pilot.
+
+For the next steps, read [npm publication and the four-runtime pilot](docs/publishing-and-pilot.md).
+It covers Multica on Terracotta and runners on the same host, a MacBook, a Ryzen laptop and a small VPS.
+It separates implemented setup from the remaining release and deployment work.
 
 ## Workflow sequence
 
@@ -65,6 +69,20 @@ For any code task, the agent follows this sequence:
 A failed required check blocks PR publication. The agent fixes the cause and repeats the relevant checks.
 New commits need fresh evidence. A material plan change returns to human plan review.
 Fast mode normally excludes functional UI regression; the PR must state that limit.
+
+### Final browser checks with Playwright
+
+Use Playwright for changes that affect a UI journey and can run in an isolated test environment.
+Run it after static checks, unit tests and integration/API tests, before publishing the PR/MR.
+Use the repository's locked Node or Python tests and matching browser revisions; reuse Ronda's existing Python harness first.
+
+Every runner should receive the same approved browser-verification skill and pinned Playwright MCP definition.
+MCP helps agents explore, reproduce issues and capture screenshots. Repeatable tests run through the repository's test command.
+Report journey coverage, the browser matrix, actual results, screenshots and supported failure traces.
+Required missing tests block publication. Approved fast-mode omissions remain explicit; repositories without a UI report N/A.
+
+Read the [Playwright test policy](docs/testing.md#playwright-as-the-final-browser-check).
+Native skill/MCP delivery and real product browser tests still need certification.
 
 ### Visual overview
 
@@ -162,12 +180,12 @@ Run tests locally. A hosted workflow, GitHub Pro, ruleset or branch-protection A
 Agents may commit, push task branches and open PRs/MRs. Instructions reserve merge and default-branch writes for humans.
 This is an instruction-based trust model, not a claim of Git-server enforcement.
 
-## Set up a runner with Tometo
+## Set up a runner with Potato
 
-Tometo installs the shared tools **inside a container image**. It checks Docker and Compose, builds the image, checks tool versions and prepares a runner bundle.
+Potato installs the shared tools **inside a container image**. It checks Docker and Compose, builds the image, checks tool versions and prepares a runner bundle.
 It does not install host runtimes, read tokens, log in or start the runner.
 The setup host needs **Node 22.8+, Docker with a running engine, and Docker Compose**.
-On macOS, start your existing Colima engine before setup if needed. Tometo does not start a VM for you.
+On macOS, start your existing Colima engine before setup if needed. Potato does not start a VM for you.
 
 The current installer exposes the `potato` command. Run it from this repository through npx:
 
@@ -240,7 +258,7 @@ Product repositories with a UI must report their actual functional scenario cove
 - `scripts/doctor-runner.py`: compare installed tool versions with that release, inside the image.
 - The generated `start-runner.sh` previews by default. `--apply` logs in through stdin and starts the runner on the chosen VM.
 
-The Tometo installer builds the shared image; the lower-level helpers prepare a bundle from an existing release.
+The Potato installer builds the shared image; the lower-level helpers prepare a bundle from an existing release.
 See the [image contract](docs/runner-setup.md#image-contract) and [pinned toolchain](docs/image-toolchain.md).
 The release example intentionally contains unresolved pins. Preparation rejects it until an operator provides approved values.
 

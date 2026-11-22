@@ -53,6 +53,22 @@ Do not inherit laptop CLAUDE.local.md, ignored AGENTS.md, personal settings, old
 - Report unavailable coverage as not measured. Report excluded checks as not run. Never turn either into a pass.
 - A required failed, skipped, timed-out or unavailable test blocks the PR. Docs-only work may use a documented non-code profile.
 
+## Browser verification with Playwright
+
+- Include Playwright as the final verification layer when a change affects a feasible browser journey, including relevant backend changes.
+  Agree on the journeys, assertions, fixtures and browser/viewport/role/state matrix in the approved test plan.
+- Reuse the repository's existing Node or Python harness, locked Playwright package and matching browser revisions.
+  Run static checks, unit and integration/API tests first, then the declared Playwright profile before PR publication.
+- Use isolated browser contexts, synthetic data and disposable test services. Never use personal browser profiles or production login state.
+- Use the approved shared browser-verification skill and pinned Playwright MCP definition when available.
+  Report missing native delivery as an acceptance gap. Do not claim that a documented catalog entry is installed.
+- Use MCP for exploration, reproduction and screenshots when helpful. Run repeatable tests through the repository command regardless of MCP use.
+- Prefer user-facing locators and assertions that wait for the expected state. Do not use fixed sleeps as the main synchronization method.
+- Capture actual scenario counts, the browser/matrix, machine-readable results, relevant screenshots and supported failure traces.
+  Disclose retries and flaky behavior. A screenshot or a successful page load alone is not a functional test.
+- Keep full mode's declared UI matrix. Route heavy suites to a capable runner instead of silently shrinking the matrix.
+  Fast omissions require approved scope and disclosure. Missing required UI tests block publication; no UI means justified N/A.
+
 ## PR evidence and tone
 
 - Run the local checks before PR creation. Bind their output to the exact candidate commit.

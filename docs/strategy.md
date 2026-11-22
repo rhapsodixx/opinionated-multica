@@ -138,6 +138,9 @@ Agree on a review-pass limit before work. Stop automatic revision loops at that 
 ## Test modes and evidence
 
 Follow the [test policy](testing.md). Full regression is the default.
+Use [Playwright as the final browser check](testing.md#playwright-as-the-final-browser-check) for applicable, feasible UI journeys after the earlier test layers.
+Share the browser-verification skill and pinned Playwright MCP catalog entry across runners; keep test packages and browser revisions locked per repository.
+MCP exploration does not replace assertions and a repeatable local test command. Native extension delivery remains acceptance work.
 Fast mode is an approved smaller scope, not a claim that all regressions ran. Functional UI tests may be excluded only with that limit shown.
 UI behavior, API contracts, authentication, migrations, dependency/runtime changes and unknown impact require full mode unless a reviewed repo policy proves otherwise.
 

@@ -62,6 +62,19 @@ Do not combine code and scenario coverage into one percentage.
 
 **Not run:** <None, or name each check and why it did not run. A required check that did not run blocks publication.>
 
+### Browser Verification
+
+<!-- Keep for changes with an applicable UI journey. Otherwise state justified N/A or an approved fast-mode omission. -->
+
+- Playwright command and locked version: `<actual command; version>`
+- Application and fixtures: <test environment, readiness and synthetic data>
+- Matrix: <browser/version, viewport, role, theme and relevant states>
+- Scenarios: <completed/required; passed, failed, skipped and retry/flaky counts>
+- Evidence: <accessible report, screenshots and supported failure traces from this tested SHA>
+- Limits: <gaps, exclusions or approved alternative verification>
+
+An exploratory MCP session or screenshots alone do not replace the automated test result.
+
 ## Screenshots / Recordings
 
 <!-- Keep this section for visual changes. Capture synthetic data after the page settles.
