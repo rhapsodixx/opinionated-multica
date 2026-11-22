@@ -1,12 +1,19 @@
 # Tometo
 
-<img src="assets/tometo-logo.png" alt="Tometo framework logo: manga-style tomato on a white background" width="220" height="220">
+<img src="assets/tometo-logo.png" alt="A plain potato drawn in manga style on a white background" width="220" height="220">
 
-A repeatable setup for Claude Code agents that work through Multica.
-**Tometo** is the framework name. Its mascot is a manga-style tomato on a white background.
+A potato-inspired workflow for a **not-so-dark software factory**, heavily influenced by **poteto (Lauren Tan)**.
 
 **Status:** strategy and setup preparation, 22 November 2026. No Multica service or runner has been deployed by this repository.
 The image builder and setup CLI are implemented. Real image/runtime certification, private extensions and product verification adapters remain acceptance work.
+
+## Philosophy
+
+A plain potato is simple to cook: **nutrient-dense, naturally low in fat and sodium, and free of cholesterol**.
+It gives you the essentials without a complicated recipe.
+
+We aim for a workflow that is simple enough to understand, run and improve, while keeping intent, verification and human decisions visible.
+Start with a working edit-and-check loop. Add more agents only when that loop holds up.
 
 ## What this project is about
 
@@ -241,7 +248,14 @@ This repository is public. Supply private plugins, MCP credentials and account t
 
 ## Credits
 
-Tometo is heavily influenced by **Lauren Tan (poteto)** and her talk,
-[All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g).
-Her Poteto pyramid shapes our focus on codebase design, repeatable checks, runtime verification and human judgment.
-The framework and its tomato mascot are named **Tometo** as a nod to poteto.
+This workflow is heavily influenced by **Lauren Tan (poteto)**, especially her Poteto pyramid and focus on verification.
+Thanks to the people sharing their agentic engineering workflows:
+
+| People / channel | Talk or video |
+| --- | --- |
+| Lauren Tan (poteto) | [All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g) |
+| Lauren Tan (poteto), hosted by Matt Pocock | [LIVE: Poteto (creator of pstack) on shipping 1,000's of PR's a month at SpaceX](https://www.youtube.com/watch?v=MN9dGgmLyso) |
+| Kun Chen | [L8 Principal's Agentic Engineering Workflow](https://www.youtube.com/watch?v=iQyg-KypKAA&t=502s) |
+| Your Average Tech Bro | [My New AI Coding Setup That Helps Me Ship 30+ PRs A Day](https://www.youtube.com/watch?v=54D1hFfaju8&t=1s) |
+
+Potato nutrition reference: [Purdue Extension FoodLink](https://extension.purdue.edu/foodlink/food.php?food=potato).
