@@ -1,16 +1,16 @@
-# Potato
+# Tometo
 
-<img src="assets/tometo-logo.png" alt="Tometo, Potato's manga-style tomato mascot on a white background" width="220" height="220">
+<img src="assets/tometo-logo.png" alt="Tometo framework logo: manga-style tomato on a white background" width="220" height="220">
 
 A repeatable setup for Claude Code agents that work through Multica.
-Our mascot is **Tometo**, a manga-style tomato on a white background.
+**Tometo** is the framework name. Its mascot is a manga-style tomato on a white background.
 
 **Status:** strategy and setup preparation, 22 November 2026. No Multica service or runner has been deployed by this repository.
 The image builder and setup CLI are implemented. Real image/runtime certification, private extensions and product verification adapters remain acceptance work.
 
 ## What this project is about
 
-Potato defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
+Tometo defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
 Multica assigns the work. Claude Code runs it inside pinned containers on dedicated worker VMs.
 
 Every runner receives the same approved skills, plugins, MCP definitions, toolchain catalog and hooks.
@@ -155,14 +155,14 @@ Run tests locally. A hosted workflow, GitHub Pro, ruleset or branch-protection A
 Agents may commit, push task branches and open PRs/MRs. Instructions reserve merge and default-branch writes for humans.
 This is an instruction-based trust model, not a claim of Git-server enforcement.
 
-## Set up a runner with Potato
+## Set up a runner with Tometo
 
-Potato installs the shared tools **inside a container image**. It checks Docker and Compose, builds the image, checks tool versions and prepares a runner bundle.
+Tometo installs the shared tools **inside a container image**. It checks Docker and Compose, builds the image, checks tool versions and prepares a runner bundle.
 It does not install host runtimes, read tokens, log in or start the runner.
 The setup host needs **Node 22.8+, Docker with a running engine, and Docker Compose**.
-On macOS, start your existing Colima engine before setup if needed. Potato does not start a VM for you.
+On macOS, start your existing Colima engine before setup if needed. Tometo does not start a VM for you.
 
-Run the interactive installer from this repository through npx:
+The current installer exposes the `potato` command. Run it from this repository through npx:
 
 ```bash
 npx --yes --package=https://github.com/rhapsodixx/opinionated-multica/archive/05e2c89add4a2946a5eb4bca970bd1c438a54128.tar.gz potato setup
@@ -178,7 +178,7 @@ From a checkout, use the same installer through Bash:
 bash setup.sh
 ```
 
-The ASCII potato and progress indicator animate in an interactive terminal. Use `--no-animation` for plain output.
+The ASCII mascot and progress indicator animate in an interactive terminal. Use `--no-animation` for plain output.
 Preview the steps without Docker calls or file writes:
 
 ```bash
@@ -233,7 +233,7 @@ Product repositories with a UI must report their actual functional scenario cove
 - `scripts/doctor-runner.py`: compare installed tool versions with that release, inside the image.
 - The generated `start-runner.sh` previews by default. `--apply` logs in through stdin and starts the runner on the chosen VM.
 
-The Potato CLI builds the shared image; the lower-level helpers prepare a bundle from an existing release.
+The Tometo installer builds the shared image; the lower-level helpers prepare a bundle from an existing release.
 See the [image contract](docs/runner-setup.md#image-contract) and [pinned toolchain](docs/image-toolchain.md).
 The release example intentionally contains unresolved pins. Preparation rejects it until an operator provides approved values.
 
@@ -241,7 +241,7 @@ This repository is public. Supply private plugins, MCP credentials and account t
 
 ## Credits
 
-Potato is heavily influenced by **Lauren Tan (poteto)** and her talk,
+Tometo is heavily influenced by **Lauren Tan (poteto)** and her talk,
 [All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g).
 Her Poteto pyramid shapes our focus on codebase design, repeatable checks, runtime verification and human judgment.
-Our tomato mascot, **Tometo**, is named as a nod to poteto.
+The framework and its tomato mascot are named **Tometo** as a nod to poteto.
