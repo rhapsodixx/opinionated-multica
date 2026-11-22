@@ -28,6 +28,9 @@ MCP exploration alone cannot satisfy the automated test gate. See the [test poli
 
 ## Tracking issues
 
+The [doctor command](doctor.md) now covers machine, bundle and repository preflight, with explicit image/browser probes.
+It leaves native extension/authentication acceptance unchecked and does not replace the product verification adapter.
+
 - [Phase 0: prove Ronda repository readiness before scaling Potato](https://github.com/rhapsodixx/opinionated-multica/issues/7)
 
 - [Build and certify the pinned polyglot runner image](https://github.com/rhapsodixx/opinionated-multica/issues/1)

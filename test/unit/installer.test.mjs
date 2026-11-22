@@ -20,7 +20,7 @@ function fakeDocker(calls, { standalone = false, fail = '' } = {}) {
     calls.push([command, ...args]);
     if (standalone && command === 'docker' && args[0] === 'compose') return { code: 1, stdout: '', stderr: 'not installed' };
     if (args.includes(fail)) return { code: 1, stdout: '', stderr: 'synthetic failure' };
-    if (args[0] === 'info') return {code:0,stdout:'[]',stderr:''};
+    if (args[0] === 'info') return {code:0,stdout:args.includes('{{json .SecurityOptions}}')?'[]':JSON.stringify({os:'linux',arch:process.arch==='arm64'?'arm64':'amd64',cpus:4,memory:8*1024**3}),stderr:''};
     if (args[0] === 'build') await writeFile(args[args.indexOf('--iidfile') + 1], 'sha256:' + 'a'.repeat(64));
     if (args.includes('/opt/potato/scripts/prepare-runner.py')) {
       const output = args[args.indexOf('--output') + 1];
@@ -123,7 +123,7 @@ test('rootless Docker prepares as container root mapped to the invoking host use
   const root=await fixture(t), calls=[], execute=fakeDocker(calls);
   await runSetup(options(root),{root,execute:async(command,args)=>{
     const result=await execute(command,args);
-    if(args[0]==='info') return {...result,stdout:'["name=rootless"]'};
+    if(args[0]==='info'&&args.includes('{{json .SecurityOptions}}')) return {...result,stdout:'["name=rootless"]'};
     return result;
   }});
   const prepare=calls.find(c=>c.includes('/opt/potato/scripts/prepare-runner.py'));
@@ -144,4 +144,15 @@ test('publishes into an existing empty directory and preserves operator files ad
     return result;
   }}), /Output changed/);
   assert.equal(await readFile(join(next.output,'operator.txt'),'utf8'),'keep');
+});
+
+test('setup rejects a runner budget larger than its VM before building',async t=>{
+  const root=await fixture(t),calls=[];
+  await assert.rejects(runSetup({...options(root),memory:'999g'},{root,execute:fakeDocker(calls)}),/capacity|memory|VM/i);
+  assert.ok(!calls.some(c=>c[1]==='build'));
+});
+test('an explicitly selected repository must have an approved profile before setup builds',async t=>{
+  const root=await fixture(t),calls=[];
+  await assert.rejects(runSetup({...options(root),repo:root},{root,execute:fakeDocker(calls)}),/repository|profile/i);
+  assert.ok(!calls.some(c=>c[1]==='build'));
 });

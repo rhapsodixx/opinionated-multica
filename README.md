@@ -235,6 +235,25 @@ Docker image builds and native extension acceptance remain separate from the moc
 
 ## Verify the preparation helpers
 
+### Check machine, runner and repository readiness
+
+```sh
+node bin/potato.mjs doctor
+node bin/potato.mjs doctor --bundle ./bundles/worker-01 --repo ../ronda --json
+node bin/potato.mjs doctor --repo ../ronda --probe
+```
+
+Doctor inspects prerequisites and configuration without installing tools, changing hooks or starting services.
+Inside the coding container, add `--repo-only --repo PATH` to inspect the checkout without a Docker socket.
+Use a reviewed `.potato/repository.json` to declare the repository's projects, check commands, coverage paths and Playwright setup.
+`--probe` runs an existing-image version check and/or a synthetic browser check for the selected scopes.
+Required failed or unchecked checks return a nonzero exit code. Configuration checks do not prove native extensions, authentication or passing product tests.
+Read the [doctor guide](docs/doctor.md) for the profile format, results and acceptance gaps.
+
+Setup also accepts `--repo PATH` to inspect that profile before building, and rejects limits above Docker VM capacity.
+
+### Run this repository's tests
+
 Install Python 3.12+ and uv. Then run:
 
 ```bash

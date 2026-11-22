@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "projects": [
+    {
+      "path": ".",
+      "language": "typescript",
+      "manifests": ["package.json"],
+      "lockfiles": ["package-lock.json"]
+    }
+  ],
+  "checks": {
+    "full": ["npm", "run", "check:full"],
+    "fast": ["npm", "run", "check:fast"],
+    "lint": ["npm", "run", "lint"],
+    "types": ["npm", "run", "typecheck"],
+    "unit": ["npm", "run", "test:unit"],
+    "integration": ["npm", "run", "test:integration"],
+    "security": ["gitleaks", "git", "--redact"],
+    "hooks": ["pre-commit", "run", "--all-files"]
+  },
+  "coverage": {
+    "unit": ["reports/unit-coverage.json"],
+    "integration": ["reports/integration-scenarios.json"],
+    "ui": ["reports/ui-scenarios.json"]
+  },
+  "ui": {
+    "required": true,
+    "binding": "node",
+    "path": ".",
+    "package": "@playwright/test",
+    "browser": "chromium",
+    "command": ["npm", "run", "test:e2e"]
+  }
+}
