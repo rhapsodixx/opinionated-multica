@@ -1,0 +1,13 @@
+flowchart TD
+    TASK["Engineering task"] --> MULTICA["Multica: route the task"]
+    MULTICA --> FEATURE["Feature: grill, INTENT, brainstorming and ADR"]
+    MULTICA --> BUG["Bug: systematic-debugging and root cause"]
+    MULTICA --> ISSUE["Issue: read-only evidence investigation"]
+    FEATURE --> PLAN["Human approves the implementation and test plan"]
+    BUG --> PLAN
+    ISSUE --> REPORT["Private triage report; a fix starts a separate task"]
+    PLAN --> RUNNER["Claude Code: TDD in isolated worktrees"]
+    RELEASE["Shared pinned image, skills, plugins, MCP and hooks"] -.-> RUNNER
+    RUNNER --> TESTS["Local checks: full by default; approved fast scope"]
+    TESTS -->|Required checks pass| PR["PR/MR: results, per-layer coverage and screenshots"]
+    PR --> HUMAN["Human reviews and merges"]

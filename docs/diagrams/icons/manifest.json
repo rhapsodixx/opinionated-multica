@@ -1,0 +1,74 @@
+{
+  "multica": {
+    "source": "explicit",
+    "url": "https://multica.ai/favicon.svg",
+    "file": "multica.svg",
+    "bytes": 778
+  },
+  "claude": {
+    "source": "devicon",
+    "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/claude/claude-original.svg",
+    "file": "claude.svg",
+    "bytes": 1835
+  },
+  "task": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/clipboard-list.svg",
+    "file": "task.svg",
+    "bytes": 534
+  },
+  "feature": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/lightbulb.svg",
+    "file": "feature.svg",
+    "bytes": 448
+  },
+  "bug": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/bug.svg",
+    "file": "bug.svg",
+    "bytes": 686
+  },
+  "issue": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/search.svg",
+    "file": "issue.svg",
+    "bytes": 349
+  },
+  "plan": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/clipboard-check.svg",
+    "file": "plan.svg",
+    "bytes": 466
+  },
+  "report": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/file-search.svg",
+    "file": "report.svg",
+    "bytes": 525
+  },
+  "test": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/flask-conical.svg",
+    "file": "test.svg",
+    "bytes": 464
+  },
+  "pr": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/git-pull-request.svg",
+    "file": "pr.svg",
+    "bytes": 439
+  },
+  "human": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/user-check.svg",
+    "file": "human.svg",
+    "bytes": 406
+  },
+  "release": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/boxes.svg",
+    "file": "release.svg",
+    "bytes": 897
+  }
+}
