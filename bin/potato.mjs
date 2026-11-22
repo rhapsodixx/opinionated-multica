@@ -5,8 +5,10 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runSetup, validateOptions } from '../lib/installer.mjs';
 import { createProgress, showBanner } from '../lib/terminal.mjs';
+import { doctor, formatDoctor } from '../lib/doctor.mjs';
 
 const help = `Usage: potato [setup] [options]
+       potato doctor [--bundle PATH] [--repo PATH] [--repo-only] [--json] [--probe]
 
 Build the shared toolchain image and prepare a Multica runner bundle.
 Host prerequisites: Node 22.8+, Docker with a running engine, Docker Compose.
@@ -17,6 +19,7 @@ Host prerequisites: Node 22.8+, Docker with a running engine, Docker Compose.
   --token-file PATH     Later login token path; never read during setup
   --cpus NUMBER         Runner CPU limit (default: 2)
   --memory SIZE         Runner memory limit (default: 4g)
+  --repo PATH           Inspect this repository profile before building
   --yes                 Confirm build/preparation without a prompt
   --plan                Show the steps without Docker calls or file writes
   --no-animation        Plain progress output
@@ -27,10 +30,26 @@ Use the generated start-runner.sh later on the chosen worker VM.
 `;
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] === 'doctor') {
+    const {values}=parseArgs({args:args.slice(1),options:{bundle:{type:'string'},repo:{type:'string'},'repo-only':{type:'boolean'},json:{type:'boolean'},
+      probe:{type:'boolean'},cpus:{type:'string'},memory:{type:'string'},'min-free-disk':{type:'string'},help:{type:'boolean',short:'h'}}});
+    if(values.help) {
+      process.stdout.write('Usage: potato doctor [--bundle PATH] [--repo PATH] [--repo-only] [--json] [--probe]\n\n'+
+        'Inspect machine prerequisites, a prepared bundle and an approved .potato/repository.json.\n'+
+        '--probe runs an offline image version check and a local synthetic browser check.\n'+
+        '--repo-only --repo PATH inspects a checkout inside a runner without Docker access.\n'+
+        'It may execute installed repository packages. No install, login or service startup.\n'+
+        '--cpus NUMBER --memory SIZE --min-free-disk SIZE check reviewed capacity budgets.\n'+
+        'Required failed or unchecked checks exit 1; --json writes one JSON document.\n'); return;
+    }
+    const report=await doctor({...values,repoOnly:values['repo-only'],minFreeDisk:values['min-free-disk'],root:resolve(dirname(fileURLToPath(import.meta.url)),'..')});
+    process.stdout.write(values.json?JSON.stringify(report,null,2)+'\n':formatDoctor(report));
+    process.exitCode=report.ready?0:1; return;
+  }
   if (args[0] === 'setup') args.shift();
   const { values } = parseArgs({ args, options: {
     server: {type:'string'}, workspace: {type:'string'}, output: {type:'string'}, 'token-file': {type:'string'},
-    cpus: {type:'string',default:'2'}, memory: {type:'string',default:'4g'}, yes: {type:'boolean'},
+    cpus: {type:'string',default:'2'}, memory: {type:'string',default:'4g'}, repo: {type:'string'}, yes: {type:'boolean'},
     plan: {type:'boolean'}, 'no-animation': {type:'boolean'}, help: {type:'boolean',short:'h'},
   } });
   showBanner(process.stdout);

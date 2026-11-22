@@ -26,15 +26,17 @@ reuse each repository's locked test harness, and run applicable UI journeys as t
 Prove matching browser revisions, isolated sessions, scenario coverage, screenshots and failure artifacts on both image architectures.
 MCP exploration alone cannot satisfy the automated test gate. See the [test policy](testing.md#playwright-as-the-final-browser-check).
 
-## Tracking issues
+## Execution tracking
 
-- [Phase 0: prove Ronda repository readiness before scaling Potato](https://github.com/rhapsodixx/opinionated-multica/issues/7)
+The [doctor command](doctor.md) now covers machine, bundle and repository preflight, with explicit image/browser probes.
+It leaves native extension/authentication acceptance unchecked and does not replace the product verification adapter.
 
-- [Build and certify the pinned polyglot runner image](https://github.com/rhapsodixx/opinionated-multica/issues/1)
-- [Implement local full and fast verification with per-layer coverage](https://github.com/rhapsodixx/opinionated-multica/issues/2)
-- [Implement feature, bug and issue workflows with human checkpoints](https://github.com/rhapsodixx/opinionated-multica/issues/3)
-- [Implement Git-provider publication and PR evidence attachment](https://github.com/rhapsodixx/opinionated-multica/issues/4)
-- [Verify parallel agents and changes across repositories](https://github.com/rhapsodixx/opinionated-multica/issues/5)
-- [Run the Ronda pilot and measure rollout readiness](https://github.com/rhapsodixx/opinionated-multica/issues/6)
+Manage the execution backlog and rollout plan in the private Linear project **opinionated-multica**.
+Keep task status, ownership, dependencies, deployment decisions and operational evidence there.
+Public documentation describes the framework and its capability contracts. It does not replace the private execution plan.
+Do not add internal task details, private project links, credentials or host inventories to public GitHub issues.
 
-These issues track later implementation. Review the plan before assigning implementation or deploying runners.
+Linear tracks the work; Multica coordinates approved agent execution; the Git host holds code review and local test evidence.
+Link a Multica task to its Linear issue. Retain the approved human plan-review checkpoint and human merge.
+A Linear status change or agent comment does not authorize implementation or production changes.
+Review the plan before assigning implementation or deploying runners.

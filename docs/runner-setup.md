@@ -4,6 +4,10 @@ Potato builds the shared-tool image and reuses the Python helpers to prepare a r
 Use `bash setup.sh` or the npx command in the README. Login and startup remain explicit.
 Tests use fake Docker commands; private extensions and real runtime acceptance are separate work.
 
+Run [Potato doctor](doctor.md) before setup and after bundle preparation.
+Setup rejects CPU/memory limits above Docker VM capacity. `--repo PATH` also checks the repository's reviewed profile before building.
+Doctor keeps native extension and identity acceptance unchecked; a valid bundle is not an operational certificate.
+
 ## Image contract
 
 The versioned build assets are `runner/Dockerfile` and `config/toolchain.json`.

@@ -29,12 +29,19 @@ FROM system AS runner
 COPY --from=tools /usr/local/ /usr/local/
 COPY config/toolchain.json /opt/potato/config/toolchain.json
 COPY runner_setup.py /opt/potato/runner_setup.py
+COPY package.json /opt/potato/package.json
+COPY bin/potato.mjs /opt/potato/bin/potato.mjs
+COPY lib/installer.mjs lib/system.mjs lib/doctor.mjs lib/terminal.mjs /opt/potato/lib/
+COPY config/repository.example.json /opt/potato/config/repository.example.json
+COPY docs/doctor.md /opt/potato/docs/doctor.md
 COPY scripts/prepare-runner.py scripts/doctor-runner.py /opt/potato/scripts/
 COPY runner/claude-launcher.sh runner/entrypoint.sh runner/start-runner.sh \
      runner/claude-settings.json runner/multica-claude.local.md /opt/potato/runner/
 RUN groupadd --gid 10001 runner \
     && useradd --uid 10001 --gid 10001 --create-home --shell /bin/bash runner \
     && chmod 0755 /opt/potato/runner/*.sh \
+    && chmod 0755 /opt/potato/bin/potato.mjs \
+    && ln -s /opt/potato/bin/potato.mjs /usr/local/bin/potato \
     && mkdir -p /home/runner/workspaces \
     && chown -R 10001:10001 /home/runner
 

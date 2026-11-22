@@ -34,7 +34,7 @@ test('successful setup never prints an executable shell command containing the o
   try {
     const bindir=join(root,'bin');mkdirSync(bindir);
     const docker=join(bindir,'docker');
-    writeFileSync(docker, '#!'+process.execPath+'\n'+`import{writeFileSync,mkdirSync}from'node:fs';const a=process.argv.slice(2);if(a[0]==='info')process.stdout.write('[]');if(a[0]==='build')writeFileSync(a[a.indexOf('--iidfile')+1],'sha256:'+'a'.repeat(64));if(a.includes('/opt/potato/scripts/prepare-runner.py')){const p=a[a.indexOf('--output')+1];mkdirSync(p);writeFileSync(p+'/compose.json','{}');}\n`);
+    writeFileSync(docker, '#!'+process.execPath+'\n'+`import{writeFileSync,mkdirSync}from'node:fs';const a=process.argv.slice(2);if(a[0]==='info')process.stdout.write(a.includes('{{json .SecurityOptions}}')?'[]':JSON.stringify({os:'linux',arch:'arm64',cpus:4,memory:8*1024**3}));if(a[0]==='build')writeFileSync(a[a.indexOf('--iidfile')+1],'sha256:'+'a'.repeat(64));if(a.includes('/opt/potato/scripts/prepare-runner.py')){const p=a[a.indexOf('--output')+1];mkdirSync(p);writeFileSync(p+'/compose.json','{}');}\n`);
     chmodSync(docker,0o755);
     const output=join(root,"bundle-$HOME-$(printf EXPANDED)-'quote");
     const result=run(['--yes','--no-animation','--server','https://multica.example.test','--workspace','dev','--output',output,'--token-file',join(root,'missing-token')],{env:{...process.env,PATH:bindir+':'+process.env.PATH}});

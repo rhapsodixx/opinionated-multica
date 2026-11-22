@@ -14,6 +14,8 @@
   "files": [
     "bin/potato.mjs",
     "lib/installer.mjs",
+    "lib/system.mjs",
+    "lib/doctor.mjs",
     "lib/terminal.mjs",
     "runner/Dockerfile",
     "runner/install-image-tools.py",
@@ -23,6 +25,8 @@
     "runner/claude-settings.json",
     "runner/multica-claude.local.md",
     "config/toolchain.json",
+    "config/repository.example.json",
+    "docs/doctor.md",
     "runner_setup.py",
     "scripts/prepare-runner.py",
     "scripts/doctor-runner.py",

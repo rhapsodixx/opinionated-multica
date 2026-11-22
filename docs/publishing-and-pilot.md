@@ -2,6 +2,8 @@
 
 Status: proposed rollout, 23 November 2026. This document authorizes no publication or deployment.
 The existing installer builds an image and prepares a bundle. Authentication and startup remain explicit.
+Keep execution tasks, ownership, dependencies and rollout decisions in the private Linear project **opinionated-multica**.
+This public guide describes the reusable release and pilot process; use the private project plan to coordinate actual work.
 
 ## Publish an npm package for npx
 
