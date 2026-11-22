@@ -14,3 +14,14 @@ Status: tracked design and preparation, 22 November 2026.
 After the shared contracts, image packaging, test adapter and workflow adapters can be implemented by separate agents.
 Define their file ownership and interfaces first. Integrate in order and run the full local profile.
 Keep coordinator deployment and production changes outside the initial runner preparation work.
+
+## Tracking issues
+
+- [Build and certify the pinned polyglot runner image](https://github.com/rhapsodixx/opinionated-multica/issues/1)
+- [Implement local full and fast verification with per-layer coverage](https://github.com/rhapsodixx/opinionated-multica/issues/2)
+- [Implement feature, bug and issue workflows with human checkpoints](https://github.com/rhapsodixx/opinionated-multica/issues/3)
+- [Implement Git-provider publication and PR evidence attachment](https://github.com/rhapsodixx/opinionated-multica/issues/4)
+- [Verify parallel agents and changes across repositories](https://github.com/rhapsodixx/opinionated-multica/issues/5)
+- [Run the Ronda pilot and measure rollout readiness](https://github.com/rhapsodixx/opinionated-multica/issues/6)
+
+These issues track later implementation. Review the plan before assigning implementation or deploying runners.
