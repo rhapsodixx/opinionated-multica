@@ -27,7 +27,9 @@ Each repository keeps its own locked dependencies, tests and project guidance.
 Parallel agents use separate worktrees and test services, so they do not edit one shared workspace.
 
 The strategy is documented and tracked. Phase 0 proves Ronda's edit-and-check loop before fleet rollout or parallel scaling.
-Start with [repository readiness](docs/repository-readiness.md) and the [implementation issues](docs/implementation.md#tracking-issues). Ronda is the first pilot.
+Start with [repository readiness](docs/repository-readiness.md) and the [implementation overview](docs/implementation.md). Ronda is the first pilot.
+Track execution work and rollout decisions in the private Linear project **opinionated-multica**.
+This public repository holds framework code, reusable guidance and PR evidence; it does not host the internal issue backlog.
 
 For the next steps, read [npm publication and the four-runtime pilot](docs/publishing-and-pilot.md).
 It covers Multica on Terracotta and runners on the same host, a MacBook, a Ryzen laptop and a small VPS.
