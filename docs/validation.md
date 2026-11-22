@@ -23,6 +23,7 @@ Independent review identified missing explicit daemon concurrency and loose tool
 Both have regression tests and fixes. The prepared runner permits one daemon task at a time.
 The version doctor rejects dependency-version matches and prereleases that differ from a stable pin.
 
-The laptop has no Docker Compose plugin. Compose schema validation and real image/startup acceptance remain pending.
+Docker Compose 5.8.0 validated a generated bundle successfully with `docker-compose -f <bundle>/compose.json config --quiet`.
+This configuration check does not need a running Docker engine. Real image/startup acceptance remains pending.
 Gitleaks 8.30.1 scanned all 29 staged public files and found no leaks.
 No container, VM, Multica service or product code was changed during these checks.
