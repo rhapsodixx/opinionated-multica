@@ -248,14 +248,7 @@ This repository is public. Supply private plugins, MCP credentials and account t
 
 ## Credits
 
-This workflow is heavily influenced by **Lauren Tan (poteto)**, especially her Poteto pyramid and focus on verification.
-Thanks to the people sharing their agentic engineering workflows:
-
-| People / channel | Talk or video |
-| --- | --- |
-| Lauren Tan (poteto) | [All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g) |
-| Lauren Tan (poteto), hosted by Matt Pocock | [LIVE: Poteto (creator of pstack) on shipping 1,000's of PR's a month at SpaceX](https://www.youtube.com/watch?v=MN9dGgmLyso) |
-| Kun Chen | [L8 Principal's Agentic Engineering Workflow](https://www.youtube.com/watch?v=iQyg-KypKAA&t=502s) |
-| Your Average Tech Bro | [My New AI Coding Setup That Helps Me Ship 30+ PRs A Day](https://www.youtube.com/watch?v=54D1hFfaju8&t=1s) |
-
-Potato nutrition reference: [Purdue Extension FoodLink](https://extension.purdue.edu/foodlink/food.php?food=potato).
+- Lauren Tan (poteto) — [All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g)
+- Lauren Tan (poteto) and Matt Pocock — [LIVE: Poteto (creator of pstack) on shipping 1,000's of PR's a month at SpaceX](https://www.youtube.com/watch?v=MN9dGgmLyso)
+- Kun Chen — [L8 Principal's Agentic Engineering Workflow](https://www.youtube.com/watch?v=iQyg-KypKAA&t=502s)
+- Your Average Tech Bro — [My New AI Coding Setup That Helps Me Ship 30+ PRs A Day](https://www.youtube.com/watch?v=54D1hFfaju8&t=1s)
