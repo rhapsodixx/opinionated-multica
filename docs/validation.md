@@ -27,6 +27,7 @@ uv run --locked python scripts/check.py fast
 
 The npm tarball contains the Docker build inputs and excludes local bytecode/private fixtures.
 A local `npm exec --offline --package=<tarball> -- potato --plan` smoke passed without Docker calls or bundle writes.
+The pinned GitHub archive npx entry point also passed plan-mode smoke at commit `05e2c89add4a2946a5eb4bca970bd1c438a54128`.
 
 The image catalog's 21 downloaded official artifacts matched their pinned SHA-256 hashes for amd64/arm64.
 The official base manifest and signed Debian snapshot metadata were checked. This verifies sources, not executable compatibility.

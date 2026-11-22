@@ -164,11 +164,12 @@ On macOS, start your existing Colima engine before setup if needed. Potato does 
 Run the interactive installer from this repository through npx:
 
 ```bash
-npx --yes --package=github:rhapsodixx/opinionated-multica potato setup
+npx --yes --package=https://github.com/rhapsodixx/opinionated-multica/archive/05e2c89add4a2946a5eb4bca970bd1c438a54128.tar.gz potato setup
 ```
 
-For a repeatable run, replace the GitHub package reference with `github:rhapsodixx/opinionated-multica#<reviewed-full-commit>`.
-The package is not published to npm. This command loads it from GitHub; it does not use an unrelated npm package named `potato`.
+The command pins the tested source commit and downloads a GitHub archive, so the setup host does not need Git.
+The package is not published to npm. This command does not use an unrelated npm package named `potato`.
+Promote a new source commit only after its local checks and package smoke pass.
 
 From a checkout, use the same installer through Bash:
 
