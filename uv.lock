@@ -77,7 +77,7 @@ wheels = [
 ]
 
 [[package]]
-name = "opinionated-multica"
+name = "potato-runner"
 version = "0.1.0"
 source = { virtual = "." }
 

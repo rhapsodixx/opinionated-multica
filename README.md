@@ -1,21 +1,23 @@
-# Opinionated Multica
+# Potato
+
+<img src="assets/potato-logo.png" alt="Potato manga mascot" width="220" height="220">
 
 A repeatable setup for Claude Code agents that work through Multica.
 
 **Status:** strategy and setup preparation, 22 November 2026. No Multica service or runner has been deployed by this repository.
-The runner image, private skill/plugin bundle and product verification adapters still need implementation and acceptance.
+The image builder and setup CLI are implemented. Real image/runtime certification, private extensions and product verification adapters remain acceptance work.
 
 ## What this project is about
 
-Opinionated Multica defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
+Potato defines how AI agents help TipTip engineers develop features, investigate bugs and triage issues.
 Multica assigns the work. Claude Code runs it inside pinned containers on dedicated worker VMs.
 
 Every runner receives the same approved skills, plugins, MCP definitions, toolchain catalog and hooks.
 Each repository keeps its own locked dependencies, tests and project guidance.
 Parallel agents use separate worktrees and test services, so they do not edit one shared workspace.
 
-The strategy is documented and tracked. The runner image, private extensions and product workflows still need implementation and certification.
-Start with the [six implementation issues](docs/implementation.md#tracking-issues). Ronda is the first pilot.
+The strategy is documented and tracked. Phase 0 proves Ronda's edit-and-check loop before fleet rollout or parallel scaling.
+Start with [repository readiness](docs/repository-readiness.md) and the [implementation issues](docs/implementation.md#tracking-issues). Ronda is the first pilot.
 
 ## Workflow sequence
 
@@ -142,6 +144,7 @@ The approval wording and workflow mapping above are this project's proposed conv
 - [Strategy](docs/strategy.md)
 - [Tests, coverage and full/fast modes](docs/testing.md)
 - [Runner setup](docs/runner-setup.md)
+- [Repository readiness / Phase 0](docs/repository-readiness.md)
 - [Implementation work](docs/implementation.md)
 - [Preparation validation](docs/validation.md)
 - [PR description template](templates/pull-request-description.md)
@@ -150,6 +153,58 @@ The approval wording and workflow mapping above are this project's proposed conv
 Run tests locally. A hosted workflow, GitHub Pro, ruleset or branch-protection API is **not required**.
 Agents may commit, push task branches and open PRs/MRs. Instructions reserve merge and default-branch writes for humans.
 This is an instruction-based trust model, not a claim of Git-server enforcement.
+
+## Set up a runner with Potato
+
+Potato installs the shared tools **inside a container image**. It checks Docker and Compose, builds the image, checks tool versions and prepares a runner bundle.
+It does not install host runtimes, read tokens, log in or start the runner.
+The setup host needs **Node 22.8+, Docker with a running engine, and Docker Compose**.
+On macOS, start your existing Colima engine before setup if needed. Potato does not start a VM for you.
+
+Run the interactive installer from this repository through npx:
+
+```bash
+npx --yes --package=github:rhapsodixx/opinionated-multica potato setup
+```
+
+For a repeatable run, replace the GitHub package reference with `github:rhapsodixx/opinionated-multica#<reviewed-full-commit>`.
+The package is not published to npm. This command loads it from GitHub; it does not use an unrelated npm package named `potato`.
+
+From a checkout, use the same installer through Bash:
+
+```bash
+bash setup.sh
+```
+
+The ASCII potato and progress indicator animate in an interactive terminal. Use `--no-animation` for plain output.
+Preview the steps without Docker calls or file writes:
+
+```bash
+bash setup.sh --plan
+```
+
+For unattended setup on the selected worker VM:
+
+```bash
+bash setup.sh --yes --no-animation \
+  --server https://multica.example.test \
+  --workspace engineering \
+  --output bundles/worker-01 \
+  --token-file /secure/path/multica-token
+```
+
+The token file is only needed for the later login. Keep it outside Git and create it with owner-only permissions.
+The setup command accepts its path, never the token value.
+
+After reviewing the bundle, preview startup separately:
+
+```bash
+bash bundles/worker-01/start-runner.sh --plan
+```
+
+`--apply` on that generated script performs the later login and startup. The installer never calls it.
+A local build records its immutable image ID. Fleet rollout requires one certified published image digest and the approved private extension release.
+Docker image builds and native extension acceptance remain separate from the mocked installer tests.
 
 ## Verify the preparation helpers
 
@@ -176,7 +231,8 @@ Product repositories with a UI must report their actual functional scenario cove
 - `scripts/doctor-runner.py`: compare installed tool versions with that release, inside the image.
 - The generated `start-runner.sh` previews by default. `--apply` logs in through stdin and starts the runner on the chosen VM.
 
-The helpers do not build or certify the future polyglot image. See the [image contract](docs/runner-setup.md#image-contract).
+The Potato CLI builds the shared image; the lower-level helpers prepare a bundle from an existing release.
+See the [image contract](docs/runner-setup.md#image-contract) and [pinned toolchain](docs/image-toolchain.md).
 The release example intentionally contains unresolved pins. Preparation rejects it until an operator provides approved values.
 
 This repository is public. Supply private plugins, MCP credentials and account tokens separately. Do not copy a laptop HOME here.

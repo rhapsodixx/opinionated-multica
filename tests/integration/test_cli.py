@@ -74,8 +74,38 @@ class SetupCliTests(unittest.TestCase):
                                   "CALL_LOG": str(log)})
             self.assertEqual(result.returncode, 0, result.stderr)
             calls = [json.loads(line) for line in log.read_text().splitlines()]
+            calls = [call for call in calls if "version" not in call["args"]]
             self.assertEqual(len(calls), 3)
             self.assertEqual(calls[0]["args"][-2:], ["config", "--quiet"])
             self.assertEqual(calls[1]["stdin_bytes"], len(token.read_text()))
             self.assertEqual(calls[2]["args"][-2:], ["up", "-d"])
             self.assertNotIn(token.read_text(), log.read_text() + result.stdout + result.stderr)
+
+    def test_startup_supports_standalone_compose_when_plugin_is_missing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            token = root / "token"
+            token.write_text("synthetic-test-token")
+            token.chmod(0o600)
+            bundle = prepare({"schema": 1,
+                "image": "sha256:" + "a" * 64,
+                "tools": {name: "1.2.3" for name in TOOL_COMMANDS}}, root / "bundle",
+                "https://multica.example.test", "engineering", token)
+            bindir = root / "bin"
+            bindir.mkdir()
+            (bindir / "docker").write_text("#!/bin/bash\nexit 1\n")
+            (bindir / "docker").chmod(0o755)
+            executable = bindir / "docker-compose"
+            executable.write_text("#!" + sys.executable + "\n" +
+                "import json,os,sys\n" +
+                "data=sys.stdin.read() if 'login' in sys.argv else ''\n" +
+                "with open(os.environ['CALL_LOG'],'a') as f: f.write(json.dumps({'args':sys.argv[1:], 'stdin_bytes':len(data)})+'\\n')\n")
+            executable.chmod(0o755)
+            log = root / "calls.jsonl"
+            result = subprocess.run(["bash", str(bundle / "start-runner.sh"), "--apply"],
+                capture_output=True, text=True, env=os.environ | {
+                    "PATH": str(bindir) + os.pathsep + os.environ["PATH"], "CALL_LOG": str(log)})
+            self.assertEqual(result.returncode, 0, result.stderr)
+            calls = [json.loads(line) for line in log.read_text().splitlines()]
+            self.assertEqual(calls[-1]["args"][-2:], ["up", "-d"])
+            self.assertEqual(next(c for c in calls if "login" in c["args"])["stdin_bytes"], len(token.read_text()))

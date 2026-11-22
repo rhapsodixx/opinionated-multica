@@ -1,5 +1,5 @@
 [project]
-name = "opinionated-multica"
+name = "potato-runner"
 version = "0.1.0"
 description = "Strategy and preparation tools for consistent Multica runners"
 requires-python = ">=3.12"
@@ -13,7 +13,7 @@ package = false
 
 [tool.coverage.run]
 branch = true
-source = ["runner_setup"]
+source = ["runner_setup", "runner", "scripts.check_support"]
 
 [tool.coverage.report]
 show_missing = true

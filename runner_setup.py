@@ -32,8 +32,8 @@ def validate_release(document):
             or document["schema"] != 1):
         raise ValueError("release schema must be 1")
     image = document.get("image")
-    if not isinstance(image, str) or not re.fullmatch(r"[\w./:-]+@sha256:[0-9a-f]{64}", image):
-        raise ValueError("image must use an immutable @sha256 digest")
+    if not isinstance(image, str) or not re.fullmatch(r"(?:[\w./:-]+@)?sha256:[0-9a-f]{64}", image):
+        raise ValueError("image must use an immutable registry digest or local sha256 image ID")
     tools = document.get("tools")
     if not isinstance(tools, dict) or set(tools) != set(TOOL_COMMANDS):
         raise ValueError("release must pin every tool listed in runner_setup.TOOL_COMMANDS")
@@ -89,16 +89,16 @@ def prepare(document, output, server, workspace, token_file, *, cpus=2, memory="
     files = {name: (ASSETS / name).read_bytes() for name in names}
     mounts = [{"type": "volume", "source": "runner-home", "target": "/home/runner"}]
     for name in names[:4]:
-        mounts.append({"type": "bind", "source": str(output / name),
-                       "target": "/etc/opinionated-multica/" + name, "read_only": True})
+        mounts.append({"type": "bind", "source": "./" + name,
+                       "target": "/etc/potato/" + name, "read_only": True})
     service = {
         "image": document["image"], "init": True, "user": "10001:10001",
-        "entrypoint": ["/bin/bash", "/etc/opinionated-multica/entrypoint.sh"],
+        "entrypoint": ["/bin/bash", "/etc/potato/entrypoint.sh"],
         "environment": {"HOME": "/home/runner", "CLAUDE_CONFIG_DIR": "/home/runner/.claude",
                         "MULTICA_SERVER_URL": server.rstrip("/"),
                         "MULTICA_WORKSPACE": workspace,
                         "MULTICA_DAEMON_MAX_CONCURRENT_TASKS": "1",
-                        "MULTICA_CLAUDE_PATH": "/etc/opinionated-multica/claude-launcher.sh",
+                        "MULTICA_CLAUDE_PATH": "/etc/potato/claude-launcher.sh",
                         "CLAUDE_REAL": "/usr/local/bin/claude", "DISABLE_AUTOUPDATER": "1"},
         "volumes": mounts, "cpus": cpus, "mem_limit": memory, "pids_limit": 512,
         "cap_drop": ["ALL"], "security_opt": ["no-new-privileges:true"],

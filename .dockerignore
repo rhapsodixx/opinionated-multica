@@ -1,0 +1,19 @@
+# Build context is an explicit public-asset allowlist. Never send operator state.
+**
+!runner/
+runner/**
+!runner/Dockerfile
+!runner/install-image-tools.py
+!runner/claude-launcher.sh
+!runner/entrypoint.sh
+!runner/start-runner.sh
+!runner/claude-settings.json
+!runner/multica-claude.local.md
+!config/
+config/**
+!config/toolchain.json
+!scripts/
+scripts/**
+!scripts/prepare-runner.py
+!scripts/doctor-runner.py
+!runner_setup.py
