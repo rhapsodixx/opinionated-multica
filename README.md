@@ -1,8 +1,9 @@
 # Potato
 
-<img src="assets/potato-logo.png" alt="Potato manga mascot" width="220" height="220">
+<img src="assets/tometo-logo.png" alt="Tometo, Potato's manga-style tomato mascot on a white background" width="220" height="220">
 
 A repeatable setup for Claude Code agents that work through Multica.
+Our mascot is **Tometo**, a manga-style tomato on a white background.
 
 **Status:** strategy and setup preparation, 22 November 2026. No Multica service or runner has been deployed by this repository.
 The image builder and setup CLI are implemented. Real image/runtime certification, private extensions and product verification adapters remain acceptance work.
@@ -237,3 +238,10 @@ See the [image contract](docs/runner-setup.md#image-contract) and [pinned toolch
 The release example intentionally contains unresolved pins. Preparation rejects it until an operator provides approved values.
 
 This repository is public. Supply private plugins, MCP credentials and account tokens separately. Do not copy a laptop HOME here.
+
+## Credits
+
+Potato is heavily influenced by **Lauren Tan (poteto)** and her talk,
+[All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g).
+Her Poteto pyramid shapes our focus on codebase design, repeatable checks, runtime verification and human judgment.
+Our tomato mascot, **Tometo**, is named as a nod to poteto.

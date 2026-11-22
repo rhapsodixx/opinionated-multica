@@ -1,8 +1,12 @@
 # Potato identity
 
-`potato-logo.png` is an original square manga-style potato mascot generated with the built-in image generation tool on 22 November 2026.
-The framework is Potato; Multica remains the coordinator. Existing repository links remain unchanged.
+The framework is **Potato**. Its mascot is **Tometo**, a red manga-style tomato on a white background.
 
-Prompt:
+`tometo-logo.png` is a square image edited with the built-in image generation tool on 22 November 2026.
+It replaces the earlier potato mascot. The original image remains in Git history.
+The character name acknowledges Lauren Tan (poteto), whose talk heavily influenced the framework.
+See the main README credits for the talk link.
 
-> Create an original square 1:1 manga-style potato mascot logo for an open-source AI engineering framework named Potato. Single charming potato character, unmistakably a potato with an irregular rounded tuber body and a few tiny potato-eye marks, expressive determined manga eyes and confident friendly face. Bold crisp black ink outlines, restrained manga screentone shading and small action accents; warm potato-gold body on a clean cream square background. Flat graphic logo with strong silhouette, centered with generous padding, legible at small repository-avatar sizes. Professional playful developer-tool brand, not a detailed scene. No text, no letters, no watermark, no border, no existing franchise characters. Deliver one finished square logo.
+Edit prompt:
+
+> Edit this existing square manga mascot logo. Replace the potato character with an unmistakable ripe RED TOMATO character named Tometo: round slightly lobed tomato body, fresh green leafy calyx on top, no potato eyes or brown potato skin. Keep the confident friendly manga expression, bold black ink outlines, tasteful screentone shading, raised fist pose, simple action accents, and clear centered logo composition. Change the entire background to pure flat WHITE #FFFFFF, no cream, no gradient, no paper tint. Preserve a square 1:1 image with generous clear padding and no cropping. Keep the artwork readable as a small repository icon. No text or letters, no watermark, no border. The framework remains named Potato; this image depicts its mascot Tometo.
