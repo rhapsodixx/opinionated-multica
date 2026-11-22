@@ -1,6 +1,6 @@
-# Tometo identity
+# Potato identity
 
-`tometo-logo.png` shows one plain potato in manga ink style on a white background.
+`potato-logo.png` shows one plain potato in manga ink style on a white background.
 It has no face, eyes, hands, limbs or character accessories. It replaces the earlier tomato mascot.
 The README explains the potato-inspired philosophy and credits poteto (Lauren Tan) and the other creators.
 
